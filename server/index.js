@@ -11,7 +11,7 @@ app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
 app.use(cookieParser())
 
-app.use('/api/fav', require('./router/favRouter'))
+// app.use('/api/fav', require('./router/favRouter'))
 
 const mongoose = require('mongoose')
 mongoose.connect(config.mongoUrl, {
