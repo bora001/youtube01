@@ -10,7 +10,6 @@ import LoginPage from './components/views/LoginPage/LoginPage'
 import RegisterPage from './components/views/RegisterPage/RegisterPage'
 import auth from './hoc/auth'
 import UploadPage from './components/views/UploadPage/UploadPage'
-
 function App() {
   
   return (
