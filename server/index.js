@@ -11,6 +11,15 @@ app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
 app.use(cookieParser())
 
+//proxy setting
+// const proxy = require('http-proxy-middleware');
+//  app.use(proxy('/api', {
+//         target: 'http://localhost:3000/',
+//         headers: {
+//             "Connection": "keep-alive"
+//         },
+//  }));
+    
 // app.use('/api/fav', require('./router/favRouter'))
 
 const mongoose = require('mongoose')
@@ -19,6 +28,7 @@ mongoose.connect(config.mongoUrl, {
 }).then(()=>console.log("MongoDB is connected....")).catch(err=>console.log(err))
 
 // app.get('/', (req, res) => res.send("this is main"))
+
 
 
 //client-axios
@@ -101,12 +111,12 @@ app.post('/api/movieapi', (req, res) => {
 
 if (process.env.NODE_ENV === 'production') {
     app.use(express.static("client/build"));
-
     app.get('/*', (req, res) => {
         res.sendFile(path.join(__dirname,"../client","build","index.html"))
     })
 }
 
+// const port = process.env.PORT || 5000
 const port = process.env.PORT || 5000
 
 app.listen(port, () => console.log(`localhost:${port}`))

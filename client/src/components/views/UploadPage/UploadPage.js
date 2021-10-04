@@ -1,8 +1,8 @@
 import React, {useState} from 'react'
 import { withRouter } from 'react-router-dom'
 import Dropzone from 'react-dropzone'
-import {Button} from 'antd'
 import { PlusOutlined } from '@ant-design/icons'
+import axios from 'axios'
 
 
 function UploadPage() {
@@ -11,8 +11,8 @@ function UploadPage() {
     const [Desc, setDesc] = useState('')
     const [Opt1, setOpt1] = useState('')
     const [Opt2, setOpt2] = useState('')
-    const Option1 = ['Private','Public']
-    const Option2 = ['Personal','Movie','Food','Music','Sport','News']
+    const Option1 = ['Private', 'Public']
+    const Option2 = ['Personal', 'Movie', 'Food', 'Music', 'Sport', 'News']
 
     const titleChange = (e) => {
         setTitle(e.currentTarget.value)
@@ -29,22 +29,40 @@ function UploadPage() {
         setOpt2(e.currentTarget.value)
     }
 
+    const DropE = (files) => {
+        let dropData = new FormData;
+        const config = {
+            header: {'content-type':'multipart/form-data'}
+        }
+        console.log(dropData, config)
+        dropData.append('file', files[0])
+
+        // axios.post('/api')
+    }
+
+
+
+
     return (
         <div>
             <form >
                     <h2>Upload video</h2>
 
-                    <Dropzone onDrop multiple maxSize>
-                        {({ getProps, getInput }) => (
-                        <div style={{ width: '300px', height: '300px', display: 'flex', justifyContent: 'center', alignItems: 'center' }} {...getProps}>
-                            <PlusOutlined style={{position:'absolute',fontSize:'36px'}}/>
-                            <input style={{ width: '100%', height: '100%' }} {...getInput} />
-                            </div>
+                <Dropzone
+                    onDrop={DropE}
+                    // multiple
+                    // maxSize
+                >
+                    {({ getProps, getInput }) => (
+                    <div style={{ width: '300px', height: '300px', display: 'flex', justifyContent: 'center', alignItems: 'center', border:'1px solid black' }} {...getProps}>
+                        <PlusOutlined style={{position:'absolute',fontSize:'36px'}}/>
+                        <input type="file" style={{ width: '100%', height: '100%', opacity:'0',cursor:'pointer' }} {...getInput} />
+                    </div>
                         )}
                     </Dropzone>
-                <div style={{ display: 'flex', flexDirection: 'column', height: 'auto', justifyContent: 'space-between' }}>
+                <div style={{ display: 'flex', flexDirection: 'column', width:'200px',height: '220px',justifyContent: 'space-between',border:'1px solid red' }}>
 
-                    <div style={{display:'flex',flexDirection:'column'}}>
+                    <div style={{display:'flex',flexDirection:'column',border:'1px solid red'}}>
                         <label>Title</label>
                         <input onChange={titleChange} value={Title}></input>
                         
@@ -62,8 +80,7 @@ function UploadPage() {
                             <option key={index}>{opt}</option>
                         ))}
                     </select>
-                    <button>Submit</button>
-                    <Button></Button>
+                    <button style={{marign:'0'}}>Submit</button>
                 </div>
             </form>
         </div>
