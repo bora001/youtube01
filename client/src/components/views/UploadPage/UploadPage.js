@@ -40,18 +40,14 @@ function UploadPage() {
         axios.post('/api/upload/videos', dropData, config)
             .then(response => {
                 if (response.data.success) {
-                    console.log(response.data)
-                
+                    console.log(response.data,'updatePage, axiospost')
                 } else {
-                    alert('failed to upload')
+                    alert(response.data.err.msg)
             }
             })
     //client : axios.post - /api/upload/videos
     //server-index - app.use - /api/upload
     //router.post - /videos
-
-        
-        
         
     }
 
