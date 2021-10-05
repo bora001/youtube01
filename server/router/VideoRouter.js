@@ -11,22 +11,26 @@ const multer = require('multer')
         },
         filename: (req, file, callback) => {
             callback(null, `${Date.now()}_${file.originalname}`)
-        },
-        fileFilter: (req, file, callback) => {
-            const ext = path.extname(file.originalname)
-            if (ext !== '.mp4') {
-                return callback(res.status(400).end('Please upload only mp4 files'), false)
-            }
-            callback(null, true)
         }
+        
 
     });
 
-    const upload = multer({ storage: storage }).single("file")
+
+    const fileFilter = (req, file, callback) => {
+            if (file.mimetype !== 'video/mp4') {
+                return callback({ msg: 'Please upload only mp4 files' }, false)
+            }
+            console.log(file.mimetype,"type")
+            callback(null, true)
+        }
+
+
+    const upload = multer({ storage: storage, fileFilter: fileFilter }).single("file")
     //client : axios.post - /api/upload/videos
     //server-index - app.use - /api/upload
     //router.post - /videos
-    
+
     router.post('/videos', (req, res) => {
         upload(req, res, err => {
             if (err) {
