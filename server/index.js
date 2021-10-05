@@ -11,25 +11,17 @@ app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
 app.use(cookieParser())
 
-//proxy setting
-// const proxy = require('http-proxy-middleware');
-//  app.use(proxy('/api', {
-//         target: 'http://localhost:3000/',
-//         headers: {
-//             "Connection": "keep-alive"
-//         },
-//  }));
+//video
+//client : axios.post - /api/upload/videos
+//server-index - app.use - /api/upload
+app.use('/api/upload', require('./router/VideoRouter'))
+app.use('/upload/',express.static('uploads'))
     
-// app.use('/api/fav', require('./router/favRouter'))
 
 const mongoose = require('mongoose')
 mongoose.connect(config.mongoUrl, {
     useNewUrlParser:true,useUnifiedTopology:true
 }).then(()=>console.log("MongoDB is connected....")).catch(err=>console.log(err))
-
-// app.get('/', (req, res) => res.send("this is main"))
-
-
 
 //client-axios
 app.get('/api/hello', (req, res) => {
@@ -104,10 +96,6 @@ app.get('/api/logout', auth, (req, res) => {
     })
 })
 
-//get api
-app.post('/api/movieapi', (req, res) => {
-    res.send(config.movieAPI)
-})
 
 if (process.env.NODE_ENV === 'production') {
     app.use(express.static("client/build"));

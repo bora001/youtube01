@@ -4,8 +4,8 @@ import Dropzone from 'react-dropzone'
 import { PlusOutlined } from '@ant-design/icons'
 import axios from 'axios'
 
-
 function UploadPage() {
+
 
     const [Title, setTitle] = useState('')
     const [Desc, setDesc] = useState('')
@@ -30,18 +30,30 @@ function UploadPage() {
     }
 
     const DropE = (files) => {
-        let dropData = new FormData;
+        let dropData = new FormData();
         const config = {
             header: {'content-type':'multipart/form-data'}
         }
-        console.log(dropData, config)
         dropData.append('file', files[0])
+        console.log(files)
 
-        // axios.post('/api')
+        axios.post('/api/upload/videos', dropData, config)
+            .then(response => {
+                if (response.data.success) {
+                    console.log(response.data)
+                
+                } else {
+                    alert('failed to upload')
+            }
+            })
+    //client : axios.post - /api/upload/videos
+    //server-index - app.use - /api/upload
+    //router.post - /videos
+
+        
+        
+        
     }
-
-
-
 
     return (
         <div>
@@ -50,13 +62,13 @@ function UploadPage() {
 
                 <Dropzone
                     onDrop={DropE}
-                    // multiple
+                    // multiple={false}
                     // maxSize
                 >
-                    {({ getProps, getInput }) => (
-                    <div style={{ width: '300px', height: '300px', display: 'flex', justifyContent: 'center', alignItems: 'center', border:'1px solid black' }} {...getProps}>
+                    {({ getRootProps, getInputProps }) => (
+                    <div style={{ width: '300px', height: '300px', display: 'flex', justifyContent: 'center', alignItems: 'center', border:'1px solid black' }} {...getRootProps()}>
                         <PlusOutlined style={{position:'absolute',fontSize:'36px'}}/>
-                        <input type="file" style={{ width: '100%', height: '100%', opacity:'0',cursor:'pointer' }} {...getInput} />
+                        <input type="file" style={{ width: '100%', height: '100%', opacity:'1',cursor:'pointer' }} {...getInputProps()} />
                     </div>
                         )}
                     </Dropzone>
