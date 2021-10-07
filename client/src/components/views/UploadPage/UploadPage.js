@@ -3,9 +3,13 @@ import { withRouter } from 'react-router-dom'
 import Dropzone from 'react-dropzone'
 import { PlusOutlined } from '@ant-design/icons'
 import axios from 'axios'
+import { useSelector } from 'react-redux'
+import { message } from 'antd'
 
-function UploadPage() {
+function UploadPage(props) {
 
+    //redux
+    const user = useSelector(state => state.user);
 
     const [Title, setTitle] = useState('')
     const [Desc, setDesc] = useState('')
@@ -13,6 +17,7 @@ function UploadPage() {
     const [Opt2, setOpt2] = useState('')
     const Option1 = ['Private', 'Public']
     const Option2 = ['Personal', 'Movie', 'Food', 'Music', 'Sport', 'News']
+    const [FilePath, setFilePath] = useState('')
     const [Duration, setDuration] = useState('')
     const [ThumbPath, setThumbPath] = useState('')
 
@@ -47,6 +52,7 @@ function UploadPage() {
                         url: response.data.url,
                         fileName : response.data.filename
                     }
+                    setFilePath(response.data.url)
 
                     axios.post('/api/uploads/thumbnail', variable)
                         .then(response => {
@@ -69,9 +75,37 @@ function UploadPage() {
         
     }
 
+    const onSubmit = (e) => {
+        e.preventDefault();
+
+        const variable = {
+            writer:user.userData._id,
+            title:Title,
+            description:Desc,
+            privacy:Opt1,
+            filePath:FilePath,
+            category:Opt2,
+            durdation:Duration,
+            thumbnail:ThumbPath
+        }
+
+        axios.post('/api/uploads/uploadVideo', variable)
+            .then(response => {
+            if (response.data.success) {
+                // console.log(response.data)
+                message.success('your video is uploaded!')
+                setTimeout(() => {
+                    props.history.push('/')
+                }, 3000);
+            } else {
+                alert('failed to upload video')
+            }
+            })
+    }
+
     return (
         <div>
-            <form >
+            <form onSubmit={onSubmit}>
                     <h2>Upload video</h2>
 
                 <Dropzone
@@ -112,7 +146,7 @@ function UploadPage() {
                             <option key={index}>{opt}</option>
                         ))}
                     </select>
-                    <button style={{marign:'0'}}>Submit</button>
+                    <button style={{marign:'0'}} onSubmit={onSubmit}>Submit</button>
                 </div>
             </form>
         </div>

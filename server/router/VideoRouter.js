@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express.Router();
-// const { Videos } = require('../models/Video')
+const { Video } = require('../models/Video')
 // const { auth } = require('../middleware/auth');
 const multer = require('multer')
 const ffmpeg = require('fluent-ffmpeg')
@@ -27,8 +27,8 @@ const ffmpeg = require('fluent-ffmpeg')
 
 
     const upload = multer({ storage: storage, fileFilter: fileFilter }).single("file")
-    //client : axios.post - /api/upload/videos
-    //server-index - app.use - /api/upload
+    //client : axios.post - /api/uploads/videos
+    //server-index - app.use - /api/uploads
     //router.post - /videos
 
     router.post('/videos', (req, res) => {
@@ -74,7 +74,21 @@ const ffmpeg = require('fluent-ffmpeg')
                 filename: 'thumbnail-%b.png'
                 // %b : input basename(filename w/o extension)
             })
+    })
+        
+    router.post('/uploadVideo', (req, res) => {
+                
+        //save the info of video
+        const video = new Video(req.body)
+        //save at the mongdo db
+        video.save((err, doc) => {
+            if (err) {
+                return res.json({success:false, err})
+            }
+            res.status(200).json({success:true})
         })
+            
+    })
 
 
 module.exports = router;
