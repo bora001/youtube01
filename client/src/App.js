@@ -19,7 +19,7 @@ function App() {
               <Route exact path="/" component={auth(LandingPage, null, true)} />
               <Route exact path="/login" component={auth(LoginPage, false)} />
               <Route exact path="/register" component={auth(RegisterPage, false)} />
-              <Route exact path="/upload" component={auth(UploadPage, false)} />
+              <Route exact path="/uploads" component={auth(UploadPage, false)} />
           {/* dev up */}
               {/* <Route exact path="/upload" component={auth(UploadPage, true)} /> */}
             </Switch>

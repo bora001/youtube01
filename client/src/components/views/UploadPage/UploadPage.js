@@ -13,6 +13,8 @@ function UploadPage() {
     const [Opt2, setOpt2] = useState('')
     const Option1 = ['Private', 'Public']
     const Option2 = ['Personal', 'Movie', 'Food', 'Music', 'Sport', 'News']
+    const [Duration, setDuration] = useState('')
+    const [ThumbPath, setThumbPath] = useState('')
 
     const titleChange = (e) => {
         setTitle(e.currentTarget.value)
@@ -37,7 +39,7 @@ function UploadPage() {
         dropData.append('file', files[0])
         console.log(files)
 
-        axios.post('/api/upload/videos', dropData, config)
+        axios.post('/api/uploads/videos', dropData, config)
             .then(response => {
                 if (response.data.success) {
                     
@@ -46,11 +48,12 @@ function UploadPage() {
                         fileName : response.data.filename
                     }
 
-                    axios.post('/api/upload/thumbnail', variable)
+                    axios.post('/api/uploads/thumbnail', variable)
                         .then(response => {
-                                    
                             if (response.data.success) {
-                            
+                                setDuration(response.data.fileDuration)
+                                setThumbPath(response.data.url)
+                                console.log(response.data.url, "patttth")
                             } else {
                                 alert('failed to make thumbnail')
                         }
@@ -63,10 +66,6 @@ function UploadPage() {
     //client : axios.post - /api/upload/videos
     //server-index - app.use - /api/upload
     //router.post - /videos
-        
-   
-                  
-        
         
     }
 
@@ -86,8 +85,14 @@ function UploadPage() {
                         <input type="file" style={{ width: '100%', height: '100%', opacity:'1',cursor:'pointer' }} {...getInputProps()} />
                     </div>
                         )}
-                    </Dropzone>
-                <div style={{ display: 'flex', flexDirection: 'column', width:'200px',height: '220px',justifyContent: 'space-between',border:'1px solid red' }}>
+                </Dropzone>
+                {ThumbPath &&
+                    <div>
+                        <img src={`http://localhost:5000/${ThumbPath}`} alt='thumbnail' />
+                    </div>
+                }
+                    
+                <div style={{ display: 'flex', flexDirection: 'column', width: '200px', height: '220px', justifyContent: 'space-between', border: '1px solid red' }}>
 
                     <div style={{display:'flex',flexDirection:'column',border:'1px solid red'}}>
                         <label>Title</label>

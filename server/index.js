@@ -14,8 +14,8 @@ app.use(cookieParser())
 //video
 //client : axios.post - /api/upload/videos
 //server-index - app.use - /api/upload
-app.use('/api/upload', require('./router/VideoRouter'))
-app.use('/upload/',express.static('uploads'))
+app.use('/api/uploads', require('./router/VideoRouter'))
+app.use('/uploads/',express.static('uploads'))
     
 
 const mongoose = require('mongoose')

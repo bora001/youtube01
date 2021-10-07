@@ -48,16 +48,14 @@ const ffmpeg = require('fluent-ffmpeg')
         let filename;
 
         ffmpeg.ffprobe(req.body.url, function (err, metadata) {
-            // console.log(metadata, 'meta')
-        console.log(req.body.url,'url probe')
-
-            // fileDuration = metadata.format.duration
+            console.log(req.body.url,'url probe')
+            fileDuration = metadata.format.duration
+            console.log(fileDuration, ' duration')
         })
-
 
         ffmpeg(req.body.url)
             .on('filenames', function (filenames) {
-                filePath = "uploads/thumbnail" + filenames[0]
+                filePath = "uploads/thumbnail/" + filenames[0]
                 console.log(filenames,'filenames on filenames')
             })
             .on('end', function () {
@@ -71,12 +69,11 @@ const ffmpeg = require('fluent-ffmpeg')
             })
             .screenshots({
                 count: 2,
-                folder: 'uploads/thumbnail',
+                folder: 'uploads/thumbnail/',
                 size: '320x240',
                 filename: 'thumbnail-%b.png'
                 // %b : input basename(filename w/o extension)
-        })
-        //     // ffmpeg
+            })
         })
 
 
