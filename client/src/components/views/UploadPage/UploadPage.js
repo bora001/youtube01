@@ -40,7 +40,22 @@ function UploadPage() {
         axios.post('/api/upload/videos', dropData, config)
             .then(response => {
                 if (response.data.success) {
-                    console.log(response.data,'updatePage, axiospost')
+                    
+                    let variable = {
+                        url: response.data.url,
+                        fileName : response.data.filename
+                    }
+
+                    axios.post('/api/upload/thumbnail', variable)
+                        .then(response => {
+                                    
+                            if (response.data.success) {
+                            
+                            } else {
+                                alert('failed to make thumbnail')
+                        }
+                        })
+
                 } else {
                     alert(response.data.err.msg)
             }
@@ -48,6 +63,10 @@ function UploadPage() {
     //client : axios.post - /api/upload/videos
     //server-index - app.use - /api/upload
     //router.post - /videos
+        
+   
+                  
+        
         
     }
 

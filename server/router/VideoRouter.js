@@ -1,9 +1,9 @@
 const express = require('express')
 const router = express.Router();
-
 // const { Videos } = require('../models/Video')
 // const { auth } = require('../middleware/auth');
 const multer = require('multer')
+const ffmpeg = require('fluent-ffmpeg')
 
     let storage = multer.diskStorage({
         //file go to uploads folder
@@ -36,9 +36,48 @@ const multer = require('multer')
             if (err) {
                 return res.json({success : false, err})
             }
-            return res.json({ success: true, url: res.req.file.path, filename: res.req.file.filename, file })
+            return res.json({ success: true, url: res.req.file.path, fileName: res.req.file.filename})
             
         })
     })
+
+    router.post('/thumbnail', (req, res) => {
+        console.log(req.body.url)
+        let fileDuration;
+        let filePath;
+        let filename;
+
+        ffmpeg.ffprobe(req.body.url, function (err, metadata) {
+            // console.log(metadata, 'meta')
+        console.log(req.body.url,'url probe')
+
+            // fileDuration = metadata.format.duration
+        })
+
+
+        ffmpeg(req.body.url)
+            .on('filenames', function (filenames) {
+                filePath = "uploads/thumbnail" + filenames[0]
+                console.log(filenames,'filenames on filenames')
+            })
+            .on('end', function () {
+                return res.json({ success: true, url: filePath, fileName: filename, fileDuration: fileDuration })
+                
+            })
+            .on('error', function (err) {
+                console.error(err);
+                return res.json({success:false, err})
+                
+            })
+            .screenshots({
+                count: 2,
+                folder: 'uploads/thumbnail',
+                size: '320x240',
+                filename: 'thumbnail-%b.png'
+                // %b : input basename(filename w/o extension)
+        })
+        //     // ffmpeg
+        })
+
 
 module.exports = router;
