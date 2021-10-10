@@ -85,7 +85,7 @@ function UploadPage(props) {
             privacy:Opt1,
             filePath:FilePath,
             category:Opt2,
-            durdation:Duration,
+            duration:Duration,
             thumbnail:ThumbPath
         }
 
