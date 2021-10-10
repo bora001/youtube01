@@ -2,7 +2,7 @@ import React, {useEffect} from 'react'
 import axios from 'axios'
 import { withRouter } from 'react-router-dom'
 import "./LandingPage.css"
-
+import VideoSection from './VideoSection/VideoSection'
 let status = {
         loginStatus:false
     };
@@ -54,6 +54,7 @@ function LandingPage(props) {
                         </div>}
                 </div>
             </div>
+            <VideoSection />
         </div>
     )
 }
