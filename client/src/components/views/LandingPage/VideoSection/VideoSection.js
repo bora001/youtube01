@@ -24,7 +24,7 @@ function VideoSection() {
         const sec = Math.floor(video.duration - min*60);
                 
         return <Col lg={6} md={8} xs={24} key={index} >
-                    <a href='/' style={{textDecoration:'none'}}>
+                    <a href={`/video/${video._id}`} style={{textDecoration:'none'}}>
                         <img src={`http://localhost:5000/${video.thumbnail}`}></img>
                         <p>Title : {video.title}</p>
                         <p>Description : {video.description}</p>

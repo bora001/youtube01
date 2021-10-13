@@ -100,6 +100,18 @@ router.get('/getvideos', (req, res) => {
             res.status(200).json({success:true, videos})
     })
             
+})
+    
+
+    router.post('/videodetails', (req, res) => {
+        Video.findOne({ "_id": req.body.videoId })
+            .populate('writer')
+            .exec((err, videodetails) => {
+                if (err) {
+                return res.status(400).send(err)
+                }
+                return res.status(200).json({success:true, videodetails})
+        })
     })
 
 
