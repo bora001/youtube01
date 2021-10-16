@@ -46,7 +46,7 @@ function LandingPage(props) {
                     {status.loginStatus
                         ?<div>
                             <button onClick={onLogoutHandler}>LOGOUT</button>
-                            <button><a href="/fav">FAVORITE</a></button>
+                            <button><a href="/uploads">UPLOAD VIDEO</a></button>
                         </div>
                         :
                         <div >

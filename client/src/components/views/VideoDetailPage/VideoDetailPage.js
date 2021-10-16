@@ -16,6 +16,7 @@ function VideoDetailPage(props) {
   useEffect(() => {
     axios.post("/api/uploads/videodetails", variable).then((response) => {
       if (response.data.success) {
+        console.log("deteail", response.data.videodetails)
         setDetailOfVideo(response.data.videodetails);
       } else {
         alert("failed to get videos from the server");
@@ -33,7 +34,6 @@ function VideoDetailPage(props) {
             controls
           ></video>
           <List.Item actions={[<Subscribe/>]}>
-          
           {/* <List.Item actions={[<Subscribe userTo={DetailOfVideo.writer._id}/>]}> */}
             {/* array form for actions in antd*/}
             <List.Item.Meta
