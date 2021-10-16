@@ -12,7 +12,6 @@ const [subscribeNum, setsubscribeNum] = useState('0')
             .then(response => {
                 if (response.data.success) {
                     setsubscribeNum(response.data.subscribeNum)
-                
                 } else {
                     alert("failed to get subscribes")
             }

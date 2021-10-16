@@ -5,7 +5,6 @@ import { PlusOutlined } from '@ant-design/icons'
 import axios from 'axios'
 import { useSelector } from 'react-redux'
 import { message } from 'antd'
-
 function UploadPage(props) {
 
     //redux
