@@ -14,7 +14,12 @@ app.use(cookieParser())
 //video
 //client : axios.post - /api/upload/videos
 //server-index - app.use - /api/upload
+//  connected router
 app.use('/api/uploads', require('./router/VideoRouter'))
+app.use('/api/subscribe', require('./router/SubscribeRouter'))
+
+
+
 app.use('/uploads/',express.static('uploads'))
     
 

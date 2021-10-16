@@ -3,6 +3,8 @@ import { withRouter } from "react-router-dom";
 import { Row, Col, List, Avatar } from "antd";
 import axios from "axios";
 import SideVideo from "./Section/SideVideo";
+import Subscribe from "./Section/Subscribe";
+
 
 function VideoDetailPage(props) {
   // props.match.params = http://address
@@ -30,7 +32,10 @@ function VideoDetailPage(props) {
             src={`http://localhost:5000/${DetailOfVideo.filePath}`}
             controls
           ></video>
-          <List.Item actions>
+          <List.Item actions={[<Subscribe/>]}>
+          
+          {/* <List.Item actions={[<Subscribe userTo={DetailOfVideo.writer._id}/>]}> */}
+            {/* array form for actions in antd*/}
             <List.Item.Meta
               avatar
               title={DetailOfVideo.title}

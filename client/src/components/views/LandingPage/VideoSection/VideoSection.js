@@ -28,9 +28,9 @@ function VideoSection() {
                         <img src={`http://localhost:5000/${video.thumbnail}`}></img>
                         <p>Title : {video.title}</p>
                         <p>Description : {video.description}</p>
-                        <p>Duration {min< 10? `0`+min : min} : {sec< 10? `0`+sec :sec}</p>
-                        </a>
-        </Col>
+                <p>Duration {min < 10 ? `0` + min : min} : {sec < 10 ? `0` + sec : sec}</p>
+                    </a>
+                </Col>
 
     })
 
