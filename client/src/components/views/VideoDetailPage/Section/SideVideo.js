@@ -7,7 +7,6 @@ function SideVideo() {
   useEffect(() => {
     axios.get("/api/uploads/getvideos").then((response) => {
       if (response.data.success) {
-        console.log(response.data.videos, "yoooo");
         setAllVideo(response.data.videos);
       } else {
         alert("failed to get videos");
