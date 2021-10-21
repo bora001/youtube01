@@ -11,6 +11,9 @@ const SubscribeSchema = mongoose.Schema({
         type:String,
         ref:'User'
     },
+    filePath: {
+            type:String
+    },
     videos: {
         title: {
             type: String,

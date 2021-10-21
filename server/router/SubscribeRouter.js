@@ -29,7 +29,7 @@ router.post('/subscribed', (req, res) => {
 
 
 router.post('/unsubscribe', (req, res) => {
-    Subscribe.findOneAndDelete({ userTo: req.body.userTo, userFrom: req.body.userFrom })
+    Subscribe.findOneAndDelete({ userTo: req.body.userTo, userFrom: req.body.userFrom, filePath : req.body.filePath})
         .exec((err, subscribe) => {
             if (err) {
             return res.status(400).send(err)

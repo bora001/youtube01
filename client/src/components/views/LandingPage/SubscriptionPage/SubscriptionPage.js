@@ -7,22 +7,43 @@ function SubscriptionPage(props) {
     const [Subscriptions, setSubscriptions] = useState([])
     
     useEffect(() => {
+        
+        getSubscribe()
 
-        axios.get("/api/subscribe/subscription", {userFrom : document.cookie.split(' = ')[1]})
+    }, [])
+
+
+    function getSubscribe() {
+          axios.get("/api/subscribe/subscription", {userFrom : document.cookie.split(' = ')[1]})
             .then((response) => {
                 if (response.data.success) {
-                    console.log(response.data.videos, "test")
                     setSubscriptions(response.data.videos)
             } else {
                 alert("failed to get videos");
             }
         });
+    }
 
-    }, [])
+    function unSubscribe(video){
 
+          let subscriber = {
+            userTo: video.userTo,
+            userFrom: video.userFrom,
+            videos: video.videos,
+            filePath : video.filePath
+        }
 
-console.log(Subscriptions)
-
+        axios.post('/api/subscribe/unsubscribe', subscriber)
+            .then(response => {
+                if (response.data.success) {
+                    getSubscribe()
+                
+                } else {
+                    alert('failed to cancel the subscribe')
+                }
+            })
+       
+    }
     
     return (
         <div style={{width:'80%',margin:'0 auto'}}>
@@ -34,6 +55,7 @@ console.log(Subscriptions)
                     <img src={`http://localhost:5000/${video.videos.thumbnail}`}/>
                     <p>Title : {video.videos.title}</p>
                     <p>Description : {video.videos.description}</p>
+                    <button onClick={() => unSubscribe(video)} value={{video}}>unSubscribe</button>
                 </div>
             ))}
 

@@ -39,7 +39,8 @@ const [subscribed, setsubscribed] = useState(false)
         let subscriber = {
             userTo: props.userTo,
             userFrom: props.userFrom,
-            videos : props.videos
+            videos: props.videos,
+            filePath : props.videos.filePath
         }
 
 
