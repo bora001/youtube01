@@ -41,6 +41,8 @@ router.post('/unsubscribe', (req, res) => {
 
 router.post('/subscribe', (req, res) => {
     const subscribe = new Subscribe(req.body)
+    console.log(req.body)
+    
     subscribe.save((err, doc) => {
        if (err) {
             return res.json({success:false})

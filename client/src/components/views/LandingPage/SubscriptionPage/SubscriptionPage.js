@@ -3,33 +3,26 @@ import React, { useEffect, useState } from 'react'
 import { withRouter } from "react-router-dom";
 
 function SubscriptionPage(props) {
-        // let variable = {userTo : props.userTo}
+
     const [Subscriptions, setSubscriptions] = useState([])
     
     useEffect(() => {
 
-    axios.get("/api/subscribe/subscription", {userFrom : document.cookie.split(' = ')[1]})
+        axios.get("/api/subscribe/subscription", {userFrom : document.cookie.split(' = ')[1]})
             .then((response) => {
                 if (response.data.success) {
                     console.log(response.data.videos, "test")
                     setSubscriptions(response.data.videos)
-      } else {
-        alert("failed to get videos");
-      }
-    });
-
+            } else {
+                alert("failed to get videos");
+            }
+        });
 
     }, [])
 
 
 console.log(Subscriptions)
 
-    
-    // const SubscriptionInfo = Subscriptions.map((subscribe, index) => {
-    //     return <div>
-    //         <p>test</p>
-    //         </div>
-    // })
     
     return (
         <div style={{width:'80%',margin:'0 auto'}}>
@@ -38,7 +31,9 @@ console.log(Subscriptions)
             <hr />
             {Subscriptions && Subscriptions.map((video, index) => (
                 <div key={index}>
-                    <p></p>
+                    <img src={`http://localhost:5000/${video.videos.thumbnail}`}/>
+                    <p>Title : {video.videos.title}</p>
+                    <p>Description : {video.videos.description}</p>
                 </div>
             ))}
 

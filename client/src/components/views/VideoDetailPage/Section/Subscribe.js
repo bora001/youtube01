@@ -18,7 +18,7 @@ const [subscribed, setsubscribed] = useState(false)
             }
             })
         
-        let subscribeInfo = { userTo: props.userTo, userFrom: props.userFrom }
+        let subscribeInfo = { userTo: props.userTo, userFrom: props.userFrom, videos : props.videos}
 
         axios.post('/api/subscribe/subscribed', subscribeInfo)
             .then(response => {
@@ -38,7 +38,8 @@ const [subscribed, setsubscribed] = useState(false)
 
         let subscriber = {
             userTo: props.userTo,
-            userFrom : props.userFrom
+            userFrom: props.userFrom,
+            videos : props.videos
         }
 
 

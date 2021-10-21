@@ -36,7 +36,7 @@ function VideoDetailPage(props) {
               controls
             ></video>
             {/* <List.Item actions> */}
-          <List.Item actions={[<Subscribe userTo={DetailOfVideo.writer._id} userFrom={document.cookie.split('=')[1]}/>]}>
+          <List.Item actions={[<Subscribe userTo={DetailOfVideo.writer._id} userFrom={document.cookie.split('=')[1]} videos={DetailOfVideo}/>]}>
               {/* array form for actions in antd*/}
               <List.Item.Meta
                 avatar

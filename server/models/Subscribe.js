@@ -10,6 +10,35 @@ const SubscribeSchema = mongoose.Schema({
         // type: Schema.Types.ObjectId,
         type:String,
         ref:'User'
+    },
+    videos: {
+        title: {
+            type: String,
+            maxlength:50
+        },
+        description: {
+            type: String
+        },
+        privacy: {
+            type: Number
+            //0 true, 1 false
+        },
+        filePath: {
+            type:String
+        },
+        category: {
+            type:String
+        },
+        views: {
+            type: Number,
+            default: 0
+        },
+        duration: {
+            type:String
+        },
+        thumbnail: {
+            type:String 
+        }
     }
 }, { timestamps: true })
 
