@@ -18,8 +18,8 @@ const [subscribed, setsubscribed] = useState(false)
             }
             })
         
-        let subscribeInfo = {userTo : props.userTo, userFrom :document.cookie.split('=')[1]}
-        
+        let subscribeInfo = { userTo: props.userTo, userFrom: props.userFrom }
+
         axios.post('/api/subscribe/subscribed', subscribeInfo)
             .then(response => {
                 if (response.data.success) {
@@ -30,6 +30,7 @@ const [subscribed, setsubscribed] = useState(false)
             }
         })
         
+
     }, [])
 
 
@@ -39,6 +40,7 @@ const [subscribed, setsubscribed] = useState(false)
             userTo: props.userTo,
             userFrom : props.userFrom
         }
+
 
 
         if (subscribed) {

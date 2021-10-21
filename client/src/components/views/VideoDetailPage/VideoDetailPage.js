@@ -14,6 +14,7 @@ function VideoDetailPage(props) {
   const [DetailOfVideo, setDetailOfVideo] = useState("");
 
   useEffect(() => {
+
     axios.post("/api/uploads/videodetails", variable).then((response) => {
       if (response.data.success) {
         setDetailOfVideo(response.data.videodetails);
@@ -25,7 +26,6 @@ function VideoDetailPage(props) {
 
 
   return (
-    
     <div>
       {DetailOfVideo &&
         <Row guttuer={[16, 16]}>
@@ -36,7 +36,7 @@ function VideoDetailPage(props) {
               controls
             ></video>
             {/* <List.Item actions> */}
-              <List.Item actions={[<Subscribe userTo={DetailOfVideo.writer._id}/>]}>
+          <List.Item actions={[<Subscribe userTo={DetailOfVideo.writer._id} userFrom={document.cookie.split('=')[1]}/>]}>
               {/* array form for actions in antd*/}
               <List.Item.Meta
                 avatar

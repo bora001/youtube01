@@ -50,6 +50,18 @@ router.post('/subscribe', (req, res) => {
 })
 
 
+router.get('/subscription', (req, res) => {
+    Subscribe
+        .find({ userFrom: req.cookies.x_auth })
+        .exec((err, videos) => {
+            if (err) {
+            return res.status(400).send(err)
+            }
+            console.log(videos)
+            res.status(200).json({success:true, videos})
+    })
+            
+})
 
 
 module.exports = router;

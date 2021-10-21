@@ -47,6 +47,7 @@ function LandingPage(props) {
                         ?<div>
                             <button onClick={onLogoutHandler}>LOGOUT</button>
                             <button><a href="/uploads">UPLOAD VIDEO</a></button>
+                            <button><a href="/subscription">SUBSCRIPTIONS</a></button>
                         </div>
                         :
                         <div >

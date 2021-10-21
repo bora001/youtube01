@@ -7,7 +7,8 @@ const SubscribeSchema = mongoose.Schema({
         ref:'User'
     },
     userFrom: {
-        type: Schema.Types.ObjectId,
+        // type: Schema.Types.ObjectId,
+        type:String,
         ref:'User'
     }
 }, { timestamps: true })
