@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { Card, Row, Col, List, Avatar } from "antd";
+import { List, Avatar } from "antd";
 import { UserOutlined } from '@ant-design/icons';
 
 function SideVideo() {
@@ -26,13 +26,10 @@ function SideVideo() {
         <div>
           <List.Item.Meta
             avatar={<Avatar size="small" icon={<UserOutlined />} />}
-            title={video.writer.name}
-        />
+            title={video.writer.name}/>
           <p>Title : {video.title}</p>
           <p>Description : {video.description}</p>
-          <p>
-            Duration {min < 10 ? `0` + min : min} : {sec < 10 ? `0` + sec : sec}
-          </p>
+          <p>Duration {min < 10 ? `0` + min : min} : {sec < 10 ? `0` + sec : sec}</p>
           <p>view: {video.views}</p>
         </div>
       </div>

@@ -1,10 +1,7 @@
 import React, { useEffect, useState } from 'react'
-import { Card ,Row, Col, Avatar, Typography} from 'antd'
+import { Row, Col, Avatar } from 'antd'
 import axios from 'axios'
 import { UserOutlined } from '@ant-design/icons';
-
-const { Meta } = Card;
-const { Title } = Typography;
 
 function VideoSection() {
 

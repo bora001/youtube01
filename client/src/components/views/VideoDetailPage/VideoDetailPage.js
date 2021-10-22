@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { withRouter } from "react-router-dom";
-import { Card, Row, Col, List, Avatar } from "antd";
+import { Row, Col, List, Avatar } from "antd";
 import axios from "axios";
 import SideVideo from "./Section/SideVideo";
 import Subscribe from "./Section/Subscribe";
 import { UserOutlined } from '@ant-design/icons';
-
-const { Meta } = Card;
 
 function VideoDetailPage(props) {
   // props.match.params = http://address
