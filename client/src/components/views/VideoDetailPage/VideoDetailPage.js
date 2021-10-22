@@ -5,6 +5,7 @@ import axios from "axios";
 import SideVideo from "./Section/SideVideo";
 import Subscribe from "./Section/Subscribe";
 import { UserOutlined } from '@ant-design/icons';
+import Comment from './Section/Comment'
 
 function VideoDetailPage(props) {
   // props.match.params = http://address
@@ -51,7 +52,9 @@ function VideoDetailPage(props) {
             <div>
               <p>Title : {DetailOfVideo.title}</p>
               <p>Description : {DetailOfVideo.description}</p>
-            </div>
+          </div>
+
+          <Comment />
 
           </Col>
           <Col lg={6} xs={24}>
