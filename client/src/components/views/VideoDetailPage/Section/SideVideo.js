@@ -1,5 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { Card, Row, Col, List, Avatar } from "antd";
+import { UserOutlined } from '@ant-design/icons';
 
 function SideVideo() {
   const [AllVideo, setAllVideo] = useState([]);
@@ -22,6 +24,10 @@ function SideVideo() {
       <div key={index}>
         <img src={`http://localhost:5000/${video.thumbnail}`} />
         <div>
+          <List.Item.Meta
+            avatar={<Avatar size="small" icon={<UserOutlined />} />}
+            title={video.writer.name}
+        />
           <p>Title : {video.title}</p>
           <p>Description : {video.description}</p>
           <p>

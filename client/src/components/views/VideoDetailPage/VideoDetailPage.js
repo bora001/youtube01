@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { withRouter } from "react-router-dom";
-import { Row, Col, List, Avatar } from "antd";
+import { Card, Row, Col, List, Avatar } from "antd";
 import axios from "axios";
 import SideVideo from "./Section/SideVideo";
 import Subscribe from "./Section/Subscribe";
+import { UserOutlined } from '@ant-design/icons';
 
+const { Meta } = Card;
 
 function VideoDetailPage(props) {
   // props.match.params = http://address
@@ -36,14 +38,23 @@ function VideoDetailPage(props) {
               controls
             ></video>
             {/* <List.Item actions> */}
-          <List.Item actions={[<Subscribe userTo={DetailOfVideo.writer._id} userFrom={document.cookie.split('=')[1]} videos={DetailOfVideo}/>]}>
-              {/* array form for actions in antd*/}
+          <List.Item
+            actions={[<Subscribe
+            userTo={DetailOfVideo.writer._id}
+            userFrom={document.cookie.split('=')[1]}
+            videos={DetailOfVideo} />]}>
+            {/* array form for actions in antd*/}
               <List.Item.Meta
-                avatar
-                title={DetailOfVideo.title}
-                description={DetailOfVideo.description}
-              />
-            </List.Item>
+                avatar={<Avatar size="small" icon={<UserOutlined />} />}
+                title={DetailOfVideo.writer.name}
+            />
+
+          </List.Item>
+            <div>
+              <p>Title : {DetailOfVideo.title}</p>
+              <p>Description : {DetailOfVideo.description}</p>
+            </div>
+
           </Col>
           <Col lg={6} xs={24}>
             <SideVideo />

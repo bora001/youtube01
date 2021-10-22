@@ -7,9 +7,7 @@ function SubscriptionPage(props) {
     const [Subscriptions, setSubscriptions] = useState([])
     
     useEffect(() => {
-        
         getSubscribe()
-
     }, [])
 
 
