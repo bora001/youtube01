@@ -5,11 +5,12 @@ import {useSelector} from 'react-redux'
 function Comment(props) {
 
     const videoId = props.postId
-    console.log(videoId)
 
     const user = useSelector(state => state.user)
     const [InputValue, setInputValue] = useState('')
-    
+
+
+
     const InputComment = (event) => {
         setInputValue(event.target.value)
     }
