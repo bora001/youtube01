@@ -54,7 +54,7 @@ function VideoDetailPage(props) {
               <p>Description : {DetailOfVideo.description}</p>
           </div>
 
-          <Comment />
+          <Comment postId={videoId}/>
 
           </Col>
           <Col lg={6} xs={24}>

@@ -1,8 +1,13 @@
 import axios from 'axios'
 import React, { useState } from 'react'
+import {useSelector} from 'react-redux'
 
-function Comment() {
+function Comment(props) {
 
+    const videoId = props.postId
+    console.log(videoId)
+
+    const user = useSelector(state => state.user)
     const [InputValue, setInputValue] = useState('')
     
     const InputComment = (event) => {
@@ -13,12 +18,15 @@ function Comment() {
         event.preventDefault()
 
         const variable = {
-            comment : InputValue,
+            content: InputValue,
+            writer: user.userData._id,
+            postId : videoId
         }
+
         axios.post('/api/comment/saveComment', variable)
             .then(response => {
                 if (response.data.success) {
-                
+                console.log(response.data.result)
                 } else {
                     alert("failed to save your comment, try again")
             }

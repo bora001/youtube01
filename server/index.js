@@ -17,6 +17,7 @@ app.use(cookieParser())
 //  connected router
 app.use('/api/uploads', require('./router/VideoRouter'))
 app.use('/api/subscribe', require('./router/SubscribeRouter'))
+app.use('/api/comment', require('./router/CommentRouter'))
 
 
 
