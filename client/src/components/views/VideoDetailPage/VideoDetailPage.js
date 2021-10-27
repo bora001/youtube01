@@ -5,7 +5,7 @@ import axios from "axios";
 import SideVideo from "./Section/SideVideo";
 import Subscribe from "./Section/Subscribe";
 import { UserOutlined } from '@ant-design/icons';
-import Comment from './Section/Comment'
+import Comments from './Section/Comment'
 
 function VideoDetailPage(props) {
   // props.match.params = http://address
@@ -13,7 +13,8 @@ function VideoDetailPage(props) {
   const variable = { videoId: videoId };
 
   const [DetailOfVideo, setDetailOfVideo] = useState("");
-
+  const [userComment, setuserComment] = useState('')
+  
   useEffect(() => {
 
     axios.post("/api/uploads/videodetails", variable).then((response) => {
@@ -23,6 +24,16 @@ function VideoDetailPage(props) {
         alert("failed to get videos from the server");
       }
     });
+
+    axios.post('/api/comment/getComment', variable)
+      .then(response => {
+        if (response.data.success) {
+          setuserComment(response.data.comments)
+        } else {
+            alert("failed to save your comment, try again")
+        }
+    })
+
   }, []);
 
 
@@ -54,7 +65,7 @@ function VideoDetailPage(props) {
               <p>Description : {DetailOfVideo.description}</p>
           </div>
 
-          <Comment postId={videoId}/>
+          <Comments postId={videoId} userComment={userComment}/>
 
           </Col>
           <Col lg={6} xs={24}>
