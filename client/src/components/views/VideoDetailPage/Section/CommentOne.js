@@ -10,6 +10,7 @@ function CommentOne(props) {
             {props.userComment && props.userComment.map((info, index) => (
                 <div key={index}>
                     <Comment
+                        actions={[<span key="comment-nested-reply-to">Reply to</span>]}
                         avatar={<Avatar size="small" icon={<UserOutlined />} />}
                         author={`${info.writer.name}`}
                         content={<p>{info.content}</p>}
