@@ -1,8 +1,6 @@
 import axios from 'axios'
 import React, { useState, useEffect } from 'react'
 import {useSelector} from 'react-redux'
-import { Comment, Avatar } from 'antd';
-import { UserOutlined } from '@ant-design/icons';
 import CommentOne from './CommentOne'
 
 function Comments(props) {
@@ -12,13 +10,27 @@ function Comments(props) {
     const user = useSelector(state => state.user)
     const [InputValue, setInputValue] = useState('')
     const [CommentInfo, setCommentInfo] = useState('')
-    // const [userComment, setuserComment] = useState('')
+    const [userComment, setuserComment] = useState('')
 
 
-    // useEffect(() => {
-        // setuserComment(props.userComment)
-    // }, [])
+    useEffect(() => {
+        getComments()
+    }, [])
 
+
+    function getComments() {
+
+        const variable = { videoId: videoId };
+
+        axios.post('/api/comment/getComment', variable)
+            .then(response => {
+                if (response.data.success) {
+                    setuserComment(response.data.comments)
+                } else {
+                    alert("failed to save your comment, try again")
+                }
+            })
+    }
 
     const InputComment = (event) => {
         setInputValue(event.target.value)
@@ -42,23 +54,13 @@ function Comments(props) {
                     alert("failed to save your comment, try again")
                 }
             })
-        console.log(InputValue)
-
+        
+        getComments()
     }
     
     return (
         <div>
-            {/* {userComment && userComment.map((info, index) => (
-                <div key={index}>
-                    <Comment
-                        avatar={<Avatar size="small" icon={<UserOutlined />} />}
-                        author={`${info.writer.name}`}
-                        content={<p>{info.content}</p>}
-                    />
-                </div>
-            ))} */}
-            <CommentOne userComment={props.userComment}/>
-            {/* {WriteComment} */ }
+            <CommentOne userComment={userComment}/>
             <form onSubmit={onComment}style={{ display:'flex', flexDirection:'row',justifyContent:'flex-start',alignItems:'flex-start', width:'100%',height:'50px'}}>
                 <input onChange={InputComment}/>
             <button onClick={onComment}>submit</button>

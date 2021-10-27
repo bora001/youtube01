@@ -13,7 +13,6 @@ function VideoDetailPage(props) {
   const variable = { videoId: videoId };
 
   const [DetailOfVideo, setDetailOfVideo] = useState("");
-  const [userComment, setuserComment] = useState('')
   
   useEffect(() => {
 
@@ -24,15 +23,6 @@ function VideoDetailPage(props) {
         alert("failed to get videos from the server");
       }
     });
-
-    axios.post('/api/comment/getComment', variable)
-      .then(response => {
-        if (response.data.success) {
-          setuserComment(response.data.comments)
-        } else {
-            alert("failed to save your comment, try again")
-        }
-    })
 
   }, []);
 
@@ -65,13 +55,12 @@ function VideoDetailPage(props) {
               <p>Description : {DetailOfVideo.description}</p>
           </div>
 
-          <Comments postId={videoId} userComment={userComment}/>
-
-          </Col>
-          <Col lg={6} xs={24}>
-            <SideVideo />
-          </Col>
-        </Row>
+          <Comments postId={videoId}/>
+        </Col>
+        <Col lg={6} xs={24}>
+          <SideVideo />
+        </Col>
+      </Row>
       }
     </div>
   );
