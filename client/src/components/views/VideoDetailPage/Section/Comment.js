@@ -1,5 +1,5 @@
 import axios from 'axios'
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import {useSelector} from 'react-redux'
 import CommentOne from './CommentOne'
 
@@ -12,6 +12,7 @@ function Comments(props) {
     const [CommentInfo, setCommentInfo] = useState('')
     const [userComment, setuserComment] = useState('')
 
+    const ref = useRef()
 
     useEffect(() => {
         getComments()
@@ -56,14 +57,15 @@ function Comments(props) {
             })
         
         getComments()
+        ref.current.value = ''
     }
     
     return (
         <div>
             <CommentOne userComment={userComment}/>
-            <form onSubmit={onComment}style={{ display:'flex', flexDirection:'row',justifyContent:'flex-start',alignItems:'flex-start', width:'100%',height:'50px'}}>
-                <input onChange={InputComment}/>
-            <button onClick={onComment}>submit</button>
+            <form onSubmit={onComment} style={{ display:'flex', flexDirection:'row',justifyContent:'flex-start',alignItems:'flex-start', width:'100%',height:'50px'}}>
+                <input type="text" ref={ref} onChange={InputComment}/>
+            <button type="submit" onClick={onComment}>submit</button>
             </form>
         </div>
     )
