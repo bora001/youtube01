@@ -10,7 +10,7 @@ function CommentOne(props) {
     }
 
     return (
-        <div style={{border:'3px solid blue'}}>
+        <div style={{}}>
 
                 <div>
                     <Comment
@@ -23,11 +23,15 @@ function CommentOne(props) {
 
             {Reply && 
 
-            <form style={{marginLeft:'10%',height:'inherit',flexDirection:'row',justifyContent:'initial',alignItems:'initial'}}>
-                <input />
-                <button>Submit</button>
+                <form style={{ marginLeft: '10%', height: 'inherit', flexDirection: 'row', justifyContent: 'initial', alignItems: 'initial' }}>
+                <textarea style={{width:'30%', height:'50px'}}/>
+                <button style={{backgroundColor:'dodgerblue'}}>Comment</button>
                 </form>
             }
+
+
+
+            
         </div>
     )
 }

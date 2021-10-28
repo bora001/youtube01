@@ -63,9 +63,9 @@ function Comments(props) {
     return (
         <div>
             <CommentOne userComment={userComment}/>
-            <form onSubmit={onComment} style={{ display:'flex', flexDirection:'row',justifyContent:'flex-start',alignItems:'flex-start', width:'100%',height:'50px'}}>
-                <input type="text" ref={ref} onChange={InputComment}/>
-            <button type="submit" onClick={onComment}>submit</button>
+            <form onSubmit={onComment} style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', width: '100%', height: '50px' }}>
+                <textarea style={{width:'90%', height:'50px'}} ref={ref} onChange={InputComment}/>
+                <button type="submit" onClick={onComment} style={{backgroundColor:'dodgerblue',height:'100%'}}>Comment</button>
             </form>
         </div>
     )

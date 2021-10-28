@@ -3,7 +3,7 @@ import CommentTwo from './CommentTwo'
 function CommentOne(props) {
 
     return (
-        <div style={{border:'3px solid blue'}}>
+        <div style={{}}>
 
             {props.userComment && props.userComment.map((info, index) => (
                 <CommentTwo info={info} key={index}/>
