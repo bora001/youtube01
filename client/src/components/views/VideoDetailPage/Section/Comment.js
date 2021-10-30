@@ -62,7 +62,7 @@ function Comments(props) {
     
     return (
         <div>
-            <CommentOne userComment={userComment}/>
+            <CommentOne userComment={userComment} videoId={videoId}/>
             <form onSubmit={onComment} style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', width: '100%', height: '50px' }}>
                 <textarea style={{width:'90%', height:'50px'}} ref={ref} onChange={InputComment}/>
                 <button type="submit" onClick={onComment} style={{backgroundColor:'dodgerblue',height:'100%'}}>Comment</button>

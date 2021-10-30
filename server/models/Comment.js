@@ -16,6 +16,9 @@ const CommentSchema = mongoose.Schema({
     },
     content: {
         type : String
+    },
+    reply: {
+        type: Array
     }
 }, { timestamps: true })
 

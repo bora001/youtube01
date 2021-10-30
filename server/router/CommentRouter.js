@@ -22,6 +22,26 @@ router.post('/saveComment', (req, res) => {
     })
 })
 
+router.post('/saveReplyComment', (req, res) => {
+    console.log(req.body)
+    // console.log(req.body.postId)
+    Comment.findOneAndUpdate({ _id: req.body.replyTo },
+        //push to reply Array
+        { $push: { reply: req.body } }
+        , (err, reply) => {
+        if (err) {
+            return res.json({
+                success: false,
+                err
+            })
+        }
+        return res.status(200).send({
+            success: true,
+            reply
+        })
+    })
+})
+
 
 
 router.post('/getComment', (req, res) => {
