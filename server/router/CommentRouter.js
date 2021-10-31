@@ -42,8 +42,6 @@ router.post('/saveReplyComment', (req, res) => {
     })
 })
 
-
-
 router.post('/getComment', (req, res) => {
     Comment.find({'postId': req.body.videoId})
         .populate('writer')
@@ -55,5 +53,18 @@ router.post('/getComment', (req, res) => {
         })
 
 })
+
+router.post('/getReplyComment', (req, res) => {
+    Comment.find({ 'postId': req.body.postId})
+        .exec((err, replycomments) => {
+            if (err) {
+            return res.status(400).send(err)
+            }
+            let replys = replycomments.map(x => x.reply)
+            console.log(replys)
+            res.status(200).json({success:true, replys})
+        })
+})
+
 
 module.exports = router;

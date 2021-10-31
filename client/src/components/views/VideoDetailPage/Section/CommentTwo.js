@@ -10,11 +10,13 @@ function CommentTwo(props) {
     const replyTo = props.info._id
     const user = useSelector(state => state.user)
     const [InputValue, setInputValue] = useState('')
-    const [CommentInfo, setCommentInfo] = useState('')
-    const [userComment, setuserComment] = useState('')
+    const [ReplyComment, setReplyComment] = useState([])
+    // const [CommentInfo, setCommentInfo] = useState('')
+    // const [userComment, setuserComment] = useState('')
     const ref = useRef()
 
     const [Reply, setReply] = useState(false)
+    const [ReplyInfo, setReplyInfo] = useState([])
 
     const onReply = (event) => {
         event.preventDefault()
@@ -26,26 +28,29 @@ function CommentTwo(props) {
         getComments()
     }, [])
 
-
+// console.log(ReplyComment, "replycommit")
     function getComments() {
-
-        // const variable = { _Id: replyTo, reply: };
-
-        // axios.post('/api/comment/getReplyComment', variable)
-        //     .then(response => {
-        //         if (response.data.success) {
-        //             // setuserComment(response.data.comments)
-        //         } else {
-        //             alert("failed to save your comment, try again")
-        //         }
-        //     })
+        // console.log(videoId, "vidid")
+        
+        const variable = {
+            postId: videoId
+        }
+        axios.post('/api/comment/getReplyComment', variable)
+            .then(response => {
+                if (response.data.success) {
+                    // console.log("rest", response.data.replys)
+                    // setReplyComment(response.data.replys)
+                } else {
+                    alert("failed to save your comment, try again")
+                }
+            })
     }
+
+
 
     const InputComment = (event) => {
         setInputValue(event.target.value)
     }
-
-    
 
     const onComment = (event) => {
         event.preventDefault()
@@ -60,16 +65,19 @@ function CommentTwo(props) {
         axios.post('/api/comment/saveReplyComment', variable)
             .then(response => {
                 if (response.data.success) {
-                    console.log(response.data.reply)
+                    // setReplyComment(response.data.comments.reply)
+                    // getComments()
+                    setReplyComment(response.data.reply)
                     // setCommentInfo(response.data.result)
                 } else {
                     alert("failed to save your comment, try again")
                 }
             })
         
-        getComments()
         ref.current.value = ''
     }
+
+// console.log("props.info", props.info)
 
     return (
         <div style={{}}>
@@ -80,8 +88,8 @@ function CommentTwo(props) {
                         author={`${props.info.writer.name}`}
                         content={<p>{props.info.content}</p>}
                 />
-                </div>
 
+            </div>
             {Reply && 
                 <form onSubmit={onComment} style={{ marginLeft: '10%', height: 'inherit', flexDirection: 'row', justifyContent: 'initial', alignItems: 'initial' }}>
                 <textarea style={{width:'30%', height:'50px'}} ref={ref} onChange={InputComment}/>
