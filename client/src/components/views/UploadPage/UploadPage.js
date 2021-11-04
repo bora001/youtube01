@@ -58,7 +58,6 @@ function UploadPage(props) {
                             if (response.data.success) {
                                 setDuration(response.data.fileDuration)
                                 setThumbPath(response.data.url)
-                                console.log(response.data.url, "patttth")
                             } else {
                                 alert('failed to make thumbnail')
                         }

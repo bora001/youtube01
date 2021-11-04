@@ -8,8 +8,7 @@ function ReplyInfo(props) {
 
     useEffect(() => {
         setReplyInfo(props.replyinfo.reply)
-        
-    }, [])
+    }, [props.replyinfo.reply])
 
     return (
         <div>
@@ -21,6 +20,7 @@ function ReplyInfo(props) {
                     <p>{reply.content}</p>
                 </div>
             })}
+
 
         </div>
     )
