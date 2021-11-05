@@ -5,6 +5,7 @@ import ReplyInfo from './ReplyInfo';
 import axios from 'axios'
 import { Comment, Avatar } from 'antd';
 import { UserOutlined } from '@ant-design/icons';
+import LikeButton from './LikeButton';
 
 function CommentOne(props) {
 
@@ -47,7 +48,7 @@ const [userComment, setuserComment] = useState([])
             })
     }
 
-        const InputComment = (event) => {
+    const InputComment = (event) => {
         setInputValue(event.target.value)
     }
 
@@ -81,7 +82,7 @@ const [userComment, setuserComment] = useState([])
             {userComment && userComment.map((info, index) => (
                 <div key={index}>
                 <Comment
-                    actions={[<span key="comment-nested-reply-to" replyid={info._id} onClick={onReply}> Reply to </span>]}
+                    actions={[[<LikeButton />],[<span key="comment-nested-reply-to" replyid={info._id} onClick={onReply}> Reply to </span>]]}
                     avatar={<Avatar size="small" icon={<UserOutlined />} />}
                     author={`${info.writer.name}`}
                     content={<p>{info.content}</p>}
