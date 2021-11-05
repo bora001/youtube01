@@ -18,8 +18,7 @@ app.use(cookieParser())
 app.use('/api/uploads', require('./router/VideoRouter'))
 app.use('/api/subscribe', require('./router/SubscribeRouter'))
 app.use('/api/comment', require('./router/CommentRouter'))
-
-
+app.use('/api/liked', require('./router/LikedRouter'))
 
 app.use('/uploads/',express.static('uploads'))
     
