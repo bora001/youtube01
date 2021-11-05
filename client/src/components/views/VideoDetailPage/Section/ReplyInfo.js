@@ -13,12 +13,12 @@ function ReplyInfo(props) {
     return (
         <div>
             {ReplyInfo && ReplyInfo.map((reply, index) => {
-                return <div key={index} style={{marginLeft:'5%'}}>
+                return <div key={index} style={{paddingLeft:'3%', marginLeft:'5%', borderLeft:'2px solid dodgerblue'}}>
                     <Comment
                         avatar={<Avatar size="small" icon={<UserOutlined />} />}
                         author={`${reply.writer.name}`}
                 />
-                    <p>{reply.content}</p>
+                    <p style={{paddingBottom:'2%'}}>{reply.content}</p>
                 </div>
             })}
 

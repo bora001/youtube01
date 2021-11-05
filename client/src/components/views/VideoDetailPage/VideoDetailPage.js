@@ -31,14 +31,16 @@ function VideoDetailPage(props) {
     <div>
       {DetailOfVideo &&
         <Row guttuer={[16, 16]}>
-          <Col lg={18} xs={24}>
+          <Col lg={18} xs={24} >
             <video
               style={{ width: "100%" }}
               src={`http://localhost:5000/${DetailOfVideo.filePath}`}
               controls
             ></video>
-            {/* <List.Item actions> */}
+          {/* <List.Item actions> */}
+          
           <List.Item
+            
             actions={[<Subscribe
             userTo={DetailOfVideo.writer._id}
             userFrom={document.cookie.split('=')[1]}
@@ -50,7 +52,7 @@ function VideoDetailPage(props) {
             />
 
           </List.Item>
-            <div>
+          <div>
               <p>Title : {DetailOfVideo.title}</p>
               <p>Description : {DetailOfVideo.description}</p>
           </div>

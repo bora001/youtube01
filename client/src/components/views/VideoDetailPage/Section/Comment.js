@@ -63,7 +63,7 @@ function Comments(props) {
     console.log("usercommnet", userComment)
 
     return (
-        <div>
+        <div style={{paddingLeft:'1%'}}>
             <CommentOne userComment={userComment} videoId={videoId}/>
             <form onSubmit={onComment} style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', width: '100%', height: '50px' }}>
                 <textarea style={{width:'90%', height:'50px'}} ref={ref} onChange={InputComment}/>
