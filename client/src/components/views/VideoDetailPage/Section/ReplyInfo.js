@@ -16,11 +16,11 @@ function ReplyInfo(props) {
                 return <div key={index} style={{marginLeft:'5%'}}>
                     <Comment
                         avatar={<Avatar size="small" icon={<UserOutlined />} />}
+                        author={`${reply.writer.name}`}
                 />
                     <p>{reply.content}</p>
                 </div>
             })}
-
 
         </div>
     )

@@ -59,7 +59,9 @@ function Comments(props) {
         getComments()
         ref.current.value = ''
     }
-    
+ 
+    console.log("usercommnet", userComment)
+
     return (
         <div>
             <CommentOne userComment={userComment} videoId={videoId}/>

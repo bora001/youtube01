@@ -23,20 +23,19 @@ const [userComment, setuserComment] = useState([])
 
     const onReply = (event) => {
         event.preventDefault()
-        setReply(!Reply)
-        setclicked(event.target.attributes.replyid.nodeValue)
-        console.log(event.target.attributes.replyid.nodeValue)
+        
+        if (clicked == '' && event.target.attributes !== clicked) {
+            setReply(!Reply)
+            setclicked(event.target.attributes.replyid.nodeValue)
+        }
     }
 
     function getComments() {
-
         const variable = { videoId: videoId };
-
         axios.post('/api/comment/getComment', variable)
             .then(response => {
                 if (response.data.success) {
                     setuserComment(response.data.comments)
-                    console.log("get comments!")
                 } else {
                     alert("failed to save your comment, try again")
                 }
@@ -53,17 +52,14 @@ const [userComment, setuserComment] = useState([])
         const variable = {
             replyTo: clicked,
             content: InputValue,
-            writer: user.userData._id,
+            writer: user.userData,
             postId: videoId
         }
 
-        console.log(variable)
         axios.post('/api/comment/saveReplyComment', variable)
             .then(response => {
                 if (response.data.success) {
-                    // setReplyComment(response.data.comments.reply)
                     setReplyComment(response.data.reply)
-                    // setCommentInfo(response.data.result)
                 } else {
                     alert("failed to save your comment, try again")
                 }
@@ -88,12 +84,13 @@ const [userComment, setuserComment] = useState([])
 
                 <ReplyInfo replyinfo={info} />
                     
-                {Reply && clicked && clicked == info._id ?
-                <form onSubmit={onComment} style={{ marginLeft: '10%', height: 'inherit', flexDirection: 'row', justifyContent: 'initial', alignItems: 'initial' }}>
-                    <textarea style={{width:'30%', height:'50px'}} ref={ref} onChange={InputComment}/>
-                    <button onClick={onComment} style={{backgroundColor:'dodgerblue'}}>Comment</button>
-                </form> : " "
-            }
+                    {clicked && clicked == info._id ?
+                        Reply &&
+                        <form onSubmit={onComment} style={{ marginLeft: '10%', height: 'inherit', flexDirection: 'row', justifyContent: 'initial', alignItems: 'initial' }}>
+                            <textarea style={{width:'30%', height:'50px'}} ref={ref} onChange={InputComment}/>
+                            <button onClick={onComment} style={{backgroundColor:'dodgerblue'}}>Comment</button>
+                        </form> : " "
+                    }
                 </div>
                 
             ))}
