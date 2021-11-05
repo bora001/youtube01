@@ -10,7 +10,7 @@ const LikedSchema = mongoose.Schema({
         type: Schema.Types.ObjectId,
         ref:'User'
     },
-    CommentrId: {
+    CommentId: {
         type: Schema.Types.ObjectId,
         ref:'Comment'
     }
