@@ -24,7 +24,12 @@ const [userComment, setuserComment] = useState([])
     const onReply = (event) => {
         event.preventDefault()
         
-        if (clicked == '' && event.target.attributes !== clicked) {
+        if (clicked !== '' && Reply == true) {
+            console.log("already clicked")
+            setReply(true)
+            setclicked(event.target.attributes.replyid.nodeValue)
+        } else if (clicked == '' && Reply == false) {
+            console.log("never clicked")
             setReply(!Reply)
             setclicked(event.target.attributes.replyid.nodeValue)
         }
