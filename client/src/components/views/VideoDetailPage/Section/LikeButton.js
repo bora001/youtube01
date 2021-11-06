@@ -14,7 +14,7 @@ function LikeButton(props) {
     }, [])
 
     function getLiked() {
-        console.log("get liked")
+
         const variable = {
             CommentId:props.info._id
         }
@@ -22,12 +22,9 @@ function LikeButton(props) {
         axios.post('/api/liked/getliked', variable)
             .then(response => {
                 if (response.data.success) {
-                    console.log("success to get liked comment")
                     setLikedComment(response.data.comments)
-
-                    let test =response.data.comments.map(x => x.userId)
-                    console.log(test == user.userData._id)
-                    if (test == user.userData._id) {
+                    let likes =response.data.comments.map(x => x.userId)
+                    if (likes == user.userData._id) {
                         setLiked(true)
                     }
                 } else {
@@ -37,7 +34,7 @@ function LikeButton(props) {
     }
 
     function onLiked() {
-        console.log("liked")
+
         setLiked(!Liked)
 
         const variable = {
@@ -46,15 +43,29 @@ function LikeButton(props) {
             CommentId:props.info._id
         }
 
-        axios.post('/api/liked/saveliked', variable)
-            .then(response => {
-                if (response.data.success) {
-                    console.log("success liked comment")
-    //                 // setuserComment(response.data.comments)
-                } else {
-                    alert("failed to like the comment, try again")
-                }
-        })
+        if (Liked) {
+            //already liked
+
+            axios.post('/api/liked/removeliked', variable)
+                .then(response => {
+                    if (response.data.success) {
+                        console.log("success unliked comment", response.data.unliked)
+                    } else {
+                        alert("failed to unlike the comment, try again")
+                    }
+            })    
+
+        } else {
+
+            axios.post('/api/liked/saveliked', variable)
+                .then(response => {
+                    if (response.data.success) {
+                        console.log("success liked comment")
+                    } else {
+                        alert("failed to like the comment, try again")
+                    }
+            })    
+        }
     }
     return (
         <div style={{ width: '25px', cursor: 'pointer' }} onClick={onLiked}>
