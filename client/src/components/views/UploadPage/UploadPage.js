@@ -105,28 +105,30 @@ function UploadPage(props) {
         <div>
             <form onSubmit={onSubmit}>
                     <h2>Upload video</h2>
-
-                <Dropzone
-                    onDrop={DropE}
-                    // multiple={false}
-                    // maxSize
-                >
-                    {({ getRootProps, getInputProps }) => (
-                    <div style={{ width: '300px', height: '300px', display: 'flex', justifyContent: 'center', alignItems: 'center', border:'1px solid black' }} {...getRootProps()}>
-                        <PlusOutlined style={{position:'absolute',fontSize:'36px'}}/>
-                        <input type="file" style={{ width: '100%', height: '100%', opacity:'1',cursor:'pointer' }} {...getInputProps()} />
-                    </div>
-                        )}
-                </Dropzone>
-                {ThumbPath &&
-                    <div>
-                        <img src={`http://localhost:5000/${ThumbPath}`} alt='thumbnail' />
-                    </div>
-                }
+        
+                <div style={{ display: 'flex', flexDirection:'column'}}>
+                    <Dropzone
+                        onDrop={DropE}
+                        // multiple={false}
+                        // maxSize
+                    >
+                        {({ getRootProps, getInputProps }) => (
+                        <div style={{ width: '320px', height: '240px', display: 'flex', justifyContent: 'center', alignItems: 'center', border:'1px solid black', cursor:'pointer' }} {...getRootProps()}>
+                            <PlusOutlined style={{position:'absolute',fontSize:'36px'}}/>
+                            <input type="file" style={{ width: '100%', height: '100%', opacity:'1',cursor:'pointer' }} {...getInputProps()} />
+                        </div>
+                            )}
+                    </Dropzone>
+                    {ThumbPath &&
+                        <div style={{marginTop:'10px'}}>
+                            <img src={`http://localhost:5000/${ThumbPath}`} alt='thumbnail' />
+                        </div>
+                    }
+                </div>
                     
-                <div style={{ display: 'flex', flexDirection: 'column', width: '200px', height: '220px', justifyContent: 'space-between', border: '1px solid red' }}>
+                <div style={{ display: 'flex', flexDirection: 'column', width: '200px', height: '260px', justifyContent: 'space-between'}}>
 
-                    <div style={{display:'flex',flexDirection:'column',border:'1px solid red'}}>
+                    <div style={{display:'flex',flexDirection:'column'}}>
                         <label>Title</label>
                         <input onChange={titleChange} value={Title}></input>
                         

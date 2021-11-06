@@ -75,6 +75,8 @@ const [userComment, setuserComment] = useState([])
 
     }
 
+
+
     return (
 
         <div style={{}}>
@@ -82,7 +84,10 @@ const [userComment, setuserComment] = useState([])
             {userComment && userComment.map((info, index) => (
                 <div key={index}>
                 <Comment
-                        actions={[[<LikeButton key="comment-nested-liked-to" info={info} infoId={info._id}/>],[<span key="comment-nested-reply-to" replyid={info._id} onClick={onReply}> Reply to </span>]]}
+                        actions={[
+                            [<LikeButton key="comment-nested-liked-to" info={info} infoId={info._id} />],
+                            [<span key="comment-nested-reply-to" replyid={info._id} onClick={onReply}> Reply to </span>]
+                        ]}
                     avatar={<Avatar size="small" icon={<UserOutlined />} />}
                     author={`${info.writer.name}`}
                     content={<p>{info.content}</p>}
