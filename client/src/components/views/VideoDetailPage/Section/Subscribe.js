@@ -74,7 +74,7 @@ const [subscribed, setsubscribed] = useState(false)
     return (
         <div>
             <button
-                style={{ backgroundColor: `${subscribed ? 'red' : 'black'}`}}
+                style={{ backgroundColor: `${subscribed ? 'red' : 'black'}`, cursor:'pointer'}}
                 onClick={onSubscribe}
                 >{subscribed ? `Subscriber : ${subscribeNum}` : 'Subscribe'}</button>
         </div>

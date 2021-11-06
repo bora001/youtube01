@@ -31,7 +31,8 @@ function VideoDetailPage(props) {
     <div>
       {DetailOfVideo &&
         <Row guttuer={[16, 16]}>
-          <Col lg={18} xs={24} >
+        <Col lg={18} xs={24}
+        >
             <video
               style={{ width: "100%" }}
               src={`http://localhost:5000/${DetailOfVideo.filePath}`}
@@ -48,13 +49,12 @@ function VideoDetailPage(props) {
             {/* array form for actions in antd*/}
               <List.Item.Meta
                 avatar={<Avatar size="small" icon={<UserOutlined />} />}
-                title={DetailOfVideo.writer.name}
+                title={`${DetailOfVideo.writer.name} - ${DetailOfVideo.title}`}
             />
 
           </List.Item>
-          <div>
-              <p>Title : {DetailOfVideo.title}</p>
-              <p>Description : {DetailOfVideo.description}</p>
+          <div style={{textIndent:'40px'}}>
+              <p>{DetailOfVideo.description}</p>
           </div>
 
           <Comments postId={videoId}/>

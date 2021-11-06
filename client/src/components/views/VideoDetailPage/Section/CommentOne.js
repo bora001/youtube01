@@ -97,7 +97,7 @@ const [userComment, setuserComment] = useState([])
                     
                     {clicked && clicked == info._id ?
                         Reply &&
-                        <form onSubmit={onComment} style={{ marginLeft: '5%', height: 'inherit', flexDirection: 'row', justifyContent: 'initial', alignItems: 'initial' }}>
+                        <form onSubmit={onComment} style={{ marginLeft: '5%',marginBottom: '5%', height: 'inherit', flexDirection: 'row', justifyContent: 'initial', alignItems: 'initial' }}>
                             <textarea style={{width:'30%', height:'50px'}} ref={ref} onChange={InputComment}/>
                             <button onClick={onComment} style={{backgroundColor:'dodgerblue', cursor:'pointer'}}>Comment</button>
                         </form> : " "

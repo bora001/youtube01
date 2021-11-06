@@ -21,16 +21,16 @@ function SideVideo() {
     const sec = Math.floor(video.duration - min * 60);
 
     return (
-      <div key={index}>
+      <div key={index} style={{width:'320px',margin:'0 auto'}}>
         <img src={`http://localhost:5000/${video.thumbnail}`} />
-        <div>
+          <p style={{position:'absolute', top:'0', color:'#fff',backgroundColor:'#000',padding:'5px', letterSpacing:'1px'}}>{min < 10 ? `0` + min : min} : {sec < 10 ? `0` + sec : sec}</p>
+
+        <div style={{padding:'10px'}}>
           <List.Item.Meta
             avatar={<Avatar size="small" icon={<UserOutlined />} />}
-            title={video.writer.name}/>
-          <p>Title : {video.title}</p>
-          <p>Description : {video.description}</p>
-          <p>Duration {min < 10 ? `0` + min : min} : {sec < 10 ? `0` + sec : sec}</p>
-          <p>view: {video.views}</p>
+            title={`${video.writer.name} - ${video.title}`} />
+          <p style={{fontSize:'18px'}}></p>
+          <p style={{fontSize:'14px'}}>{video.views} views</p>
         </div>
       </div>
     );
