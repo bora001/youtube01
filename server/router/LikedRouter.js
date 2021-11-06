@@ -17,7 +17,7 @@ router.post('/saveliked', (req, res) => {
 
 router.post('/getliked', (req, res) => {
 
-     Liked.find({'CommentId': req.body.CommentId})
+     Liked.find({'CommentId': req.body.CommentId, 'userId':req.body.userId})
         .exec((err, comments) => {
             if (err) {
                 return res.status(400).send(err)

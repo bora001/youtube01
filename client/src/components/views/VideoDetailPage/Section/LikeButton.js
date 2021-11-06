@@ -16,6 +16,7 @@ function LikeButton(props) {
     function getLiked() {
 
         const variable = {
+            userId:user.userData._id,
             CommentId:props.info._id
         }
 
@@ -23,7 +24,7 @@ function LikeButton(props) {
             .then(response => {
                 if (response.data.success) {
                     setLikedComment(response.data.comments)
-                    let likes =response.data.comments.map(x => x.userId)
+                    let likes = response.data.comments.map(x => x.userId)
                     if (likes == user.userData._id) {
                         setLiked(true)
                     }
