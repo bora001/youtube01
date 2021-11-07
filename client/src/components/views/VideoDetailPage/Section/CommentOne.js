@@ -24,16 +24,24 @@ const [userComment, setuserComment] = useState([])
 
     const onReply = (event) => {
         event.preventDefault()
-        
-        if (clicked !== '' && Reply == true) {
-            console.log("already clicked")
+        let clickedNow = event.target.attributes.replyid.nodeValue
+        // console.log(clicked, "clikedbefore")
+        // console.log(, "nowcliked")
+        if (Reply == true) {
+
             setReply(true)
-            setclicked(event.target.attributes.replyid.nodeValue)
-        } else if (clicked == '' && Reply == false) {
-            console.log("never clicked")
-            setReply(!Reply)
-            setclicked(event.target.attributes.replyid.nodeValue)
+            setclicked(clickedNow)
+           
+            if (clicked == clickedNow) {
+                console.log("same")
+                setReply(false)
+            }
+        
+        } else {
+                setReply(!Reply)
+                setclicked(clickedNow)
         }
+        
     }
 
     function getComments() {
