@@ -24,11 +24,11 @@ function VideoSection() {
         const min = Math.floor(video.duration/60)
         const sec = Math.floor(video.duration - min*60);
                 
-        return <Col lg={6} md={8} xs={24} key={index} >
+        return <Col lg={6} md={8} xs={24} key={index}>
             <a href={`/video/${video._id}`} style={{ textDecoration: 'none', color: '#000' }}>
                     <p style={{position:'absolute', color:'#fff',backgroundColor:'#000',padding:'5px', letterSpacing:'1px'}}>{min < 10 ? `0` + min : min} : {sec < 10 ? `0` + sec : sec}</p>
                 
-                <img src={`http://localhost:5000/${video.thumbnail}`}></img>
+                <img src={`http://localhost:5000/${video.thumbnail}`} style={{width:'100%'}}></img>
                 <div style={{marginTop:'10px', fontSize:'16px', lineHeight:'22px',fontWeight:'500'}}>
                     <div style={{display:'flex', width:'100%'}}>
                         <Avatar size="small" icon={<UserOutlined />} />

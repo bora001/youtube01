@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { List, Avatar } from "antd";
+import { Col, List, Avatar } from "antd";
 import { UserOutlined } from '@ant-design/icons';
 
 function SideVideo() {
@@ -21,8 +21,9 @@ function SideVideo() {
     const sec = Math.floor(video.duration - min * 60);
 
     return (
-      <div key={index} style={{width:'320px',margin:'0 auto'}}>
-        <img src={`http://localhost:5000/${video.thumbnail}`} />
+      <Col lg={22} md={8} xs={22} key={index}>
+      {/* <div key={index} style={{width:'320px',margin:'0 auto'}}> */}
+        <img src={`http://localhost:5000/${video.thumbnail}`} style={{width:'100%'}}/>
           <p style={{position:'absolute', top:'0', color:'#fff',backgroundColor:'#000',padding:'5px', letterSpacing:'1px'}}>{min < 10 ? `0` + min : min} : {sec < 10 ? `0` + sec : sec}</p>
 
         <div style={{padding:'10px'}}>
@@ -32,11 +33,12 @@ function SideVideo() {
           <p style={{fontSize:'18px'}}></p>
           <p style={{fontSize:'14px'}}>{video.views} views</p>
         </div>
-      </div>
+        {/* </div> */}
+        </Col>
     );
   });
 
-  return <>{renderVideos}</>;
+  return <div style={{display:'flex', flexWrap:'wrap',justifyContent:'center'}}>{renderVideos}</div>;
 }
 
 export default SideVideo;
